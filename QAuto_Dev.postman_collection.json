@@ -1,0 +1,1096 @@
+{
+	"info": {
+		"_postman_id": "ed30c3ca-e43d-4df7-be3c-ea69bacb9712",
+		"name": "QAuto Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44727906",
+		"_collection_link": "https://qapro6.postman.co/workspace/Test-WS~8c395a3b-cc00-4bfa-927b-9f1bdb0d2936/collection/44727906-ed30c3ca-e43d-4df7-be3c-ea69bacb9712?action=share&source=collection_link&creator=44727906"
+	},
+	"item": [
+		{
+			"name": "Sign up Tests",
+			"item": [
+				{
+					"name": "Sign Up Status code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is acceptable\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up Cookie",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Set-Cookie is present\", function () {\r",
+									"    pm.response.to.have.header(\"Set-Cookie\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up Currency",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Currency is USD\", function () {\r",
+									"    pm.expect(jsonData.data.currency).to.eql(\"usd\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up UserId",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"UserId is valid\", function () {\r",
+									"    pm.expect(jsonData.data.userId).to.be.a(\"number\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up email",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is correct\", function () {\r",
+									"    pm.expect(requestBody.email).to.match(/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Password is valid\", function () {\r",
+									"    pm.expect(requestBody.password).to.match(/^[A-Za-z\\d]{10,}$v/);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"Test1234!\",\r\n  \"repeatPassword\": \"Test1234!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up name/last name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"pm.test(\"Name is valid\", function () {\r",
+									"    pm.expect(requestBody.name).to.match(/^[a-z'-]+$/);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Last name is valid\", function () {\r",
+									"    pm.expect(requestBody.lastName).to.match(/^[a-z'-]+$/);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserEmail}}\",\r\n  \"lastName\": \"{{UserEmail}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sign Up",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$/;\r",
+							"function randomPassGen(length) {\r",
+							"  const symbols =\r",
+							"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+							"  let password = \"\";\r",
+							"  do {\r",
+							"    password = \"\";\r",
+							"    for (let i = 0; i < length; i++) {\r",
+							"      password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+							"    }\r",
+							"  } while (!regex.test(password));\r",
+							"\r",
+							"  return password;\r",
+							"}\r",
+							"\r",
+							"const randomPass = randomPassGen(10);\r",
+							"pm.environment.set(\"randomPass\", randomPass);\r",
+							"\r",
+							"\r",
+							"pm.environment.set (\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+							"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+							"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"pm.environment.set(\"UserId\", response.data.userId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/auth/signup",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"remember\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/auth/signin",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Out",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/auth/logout",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Current Users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/current",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/profile",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User Profile",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function randomImgGen(length) {\r",
+							"  const symbols =\r",
+							"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+							"  let imgname = \"\";\r",
+							"  for (i = 0; i < length; i++) {\r",
+							"    imgname += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+							"  }\r",
+							"  let fullimgname = \"user-\" + imgname + \".png\";\r",
+							"  return fullimgname;\r",
+							"}\r",
+							"const randomImg = randomImgGen(5);\r",
+							"pm.environment.set(\"NewPhoto\", randomImg);\r",
+							"\r",
+							"\r",
+							"\r",
+							"function randomCountryGen() {\r",
+							"  const countries = [\r",
+							"    \"Ukraine\",\r",
+							"    \"Germany\",\r",
+							"    \"Spain\",\r",
+							"    \"Latvia\",\r",
+							"    \"Norway\",\r",
+							"    \"Thailand\",\r",
+							"    \"Greece\",\r",
+							"    \"Iran\",\r",
+							"    \"Austria\",\r",
+							"  ];\r",
+							"  let index = Math.floor(Math.random() * countries.length);\r",
+							"  return countries[index];\r",
+							"}\r",
+							"const randomCountry = randomCountryGen();\r",
+							"pm.environment.set(\"NewCountry\", randomCountry);\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"DOB\", pm.environment.replaceIn(\"{{$randomDatePast}}\"));\r",
+							"pm.environment.set (\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+							"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+							"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"photo\": \"{{NewPhoto}}\",\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"dateBirth\": \"{{DOB}}\",\r\n  \"country\": \"{{NewCountry}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/profile",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Settings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"photo\": \"user-1621352948859.jpg\",\r\n  \"name\": \"John\",\r\n  \"lastName\": \"Dou\",\r\n  \"dateBirth\": \"2021-03-17T15:21:05.000Z\",\r\n  \"country\": \"Ukraine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/settings",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var requestBody = JSON.parse(pm.request.body.raw);\r",
+							"pm.environment.set(\"randomPass\", requestBody.password);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$/;\r",
+							"function randomPassGen(length) {\r",
+							"  const symbols =\r",
+							"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+							"  let password = \"\";\r",
+							"  do {\r",
+							"    password = \"\";\r",
+							"    for (let i = 0; i < length; i++) {\r",
+							"      password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+							"    }\r",
+							"  } while (!regex.test(password));\r",
+							"\r",
+							"  return password;\r",
+							"}\r",
+							"\r",
+							"const newRandomPass = randomPassGen(10);\r",
+							"pm.environment.set(\"newRandomPass\", newRandomPass);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"oldPassword\": \"{{randomPass}}\",\r\n  \"password\": \"{{newRandomPass}}\",\r\n  \"repeatPassword\": \"{{newRandomPass}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/password",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"carId\", jsonData.data.id);\r",
+							"pm.environment.set(\"carMileage\", jsonData.data.mileage);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carBrandId\": 1,\r\n  \"carModelId\": 1,\r\n  \"mileage\": 122\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/cars",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Car",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let mileage = pm.environment.get (\"carMileage\");\r",
+							"let newMileage = parseInt(mileage)+Math.floor(Math.random()*10);\r",
+							"console.log(mileage, newMileage)\r",
+							"pm.environment.set(\"carMileage\", newMileage);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carBrandId\": 2,\r\n  \"carModelId\": 1,\r\n  \"mileage\": {{carMileage}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/cars/{{carId}}",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"cars",
+						"{{carId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset (\"UserId\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "randomPass",
+			"value": ""
+		},
+		{
+			"key": "UserFirstName",
+			"value": ""
+		},
+		{
+			"key": "UserLastName",
+			"value": ""
+		},
+		{
+			"key": "UserEmail",
+			"value": ""
+		},
+		{
+			"key": "UserId",
+			"value": ""
+		}
+	]
+}
