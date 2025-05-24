@@ -1,0 +1,11 @@
+baseURL,AFirstName,ALastName,AEmail,ArandomPass,AcarID,AcarModel,AcarMiles
+https://qauto2.forstudy.space/api,Carman,Carson,Carmichaelx@mail.com,Test1234,1,2,47
+https://qauto2.forstudy.space/api,423342,Carson,Carmichael@mail.com,Test1234,1,"",47
+https://qauto2.forstudy.space/api,Carman,"",Carmichael@mail.com,Test1234,1,2,dsfe
+https://qauto2.forstudy.space/api,Carman,Carson,mail.com@cars,Test1234
+https://qauto2.forstudy.space/api,Carman,Carson,Carmichael@mail.com,""
+https://qauto.forstudy.space/api,Lightning,McQueen,Carmichaelp@mail.com,Test1234,1,2,47
+https://qauto.forstudy.space/api,"",McQueen,Carmichael@mail.com,Test1234,1,2,""
+https://qauto.forstudy.space/api,Lightning,$@#%@##,Carmichael@mail.com,Test1234,1,asd,47
+https://qauto.forstudy.space/api,Lightning,McQueen,gamil.com@cars,Test1234
+https://qauto.forstudy.space/api,Lightning,McQueen,Carmichael@mail.com,1234543216789009876!@

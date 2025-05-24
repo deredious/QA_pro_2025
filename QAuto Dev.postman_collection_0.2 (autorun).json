@@ -1,0 +1,1955 @@
+{
+	"info": {
+		"_postman_id": "ed30c3ca-e43d-4df7-be3c-ea69bacb9712",
+		"name": "QAuto Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44727906",
+		"_collection_link": "https://qapro6.postman.co/workspace/Test-WS~8c395a3b-cc00-4bfa-927b-9f1bdb0d2936/collection/44727906-ed30c3ca-e43d-4df7-be3c-ea69bacb9712?action=share&source=collection_link&creator=44727906"
+	},
+	"item": [
+		{
+			"name": "Sign up Tests",
+			"item": [
+				{
+					"name": "Sign Up Universal Test",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"let randomNames = [\"Mykyta\", \"Hans\", \"X4om-21\", \"1984\", \"\", \"BR\", \"@#$#@%\", \"GKUYIvukvUdjsaduasvDJDVASduv123\", \"Zerov\", \"Martinez\",\"Henry-14th\", \"4335\", \"\"];\r",
+									"let namesIndex = Math.floor(Math.random() * randomNames.length);\r",
+									"pm.environment.set(\"FirstName\", randomNames[namesIndex]);\r",
+									"\r",
+									"// let lastnamesIndex = Math.floor(Math.random() * randomNames.length);\r",
+									"// pm.environment.set(\"LastName\", randomNames[lastnamesIndex]);\r",
+									"\r",
+									"// let randomEmails = [\"mail@mail.com\", \"123@mail.com\", \"mail.com@123\", \"123.com\", \"\" ];\r",
+									"// let emailsIndex = Math.floor(Math.random() * randomNames.length);\r",
+									"// pm.environment.set(\"Email\", randomEmails[emailsIndex]);\r",
+									"\r",
+									"// let randomPasses = [\"testpass123\", \"test\", \"1234321\", \"123\", \"!@#$!\", \"\"];\r",
+									"// let passIndex = Math.floor(Math.random() * randomNames.length);\r",
+									"// pm.environment.set(\"Password\", randomPasses[passIndex]);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"var regex = /^[a-zA-Z\\s-]+$/;\r",
+									"pm.test(\"Status code is acceptable\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+									"});\r",
+									"\r",
+									"let expectedName = pm.environment.get(\"FirstName\");\r",
+									"    if (expectedName === \"\"){\r",
+									"        pm.test(\"Name is empty\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (expectedName.length < 2 || expectedName.length > 20){\r",
+									"        pm.test(\"Name is too short/long\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Name has to be from 2 to 20 characters long\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (!regex.test(expectedName)){\r",
+									"        pm.test(\"Name contains invalid symbols\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Name is invalid\");\r",
+									"        });\r",
+									"    }\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{FirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}\r\n// {\r\n//   \"name\": \"{{FirstName}}\",\r\n//   \"lastName\": \"{{LastName}}\",\r\n//   \"email\": \"{{Email}}\",\r\n//   \"password\": \"{{Password}}\",\r\n//   \"repeatPassword\": \"{{Password}}\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up Status code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is acceptable\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up Cookie",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Set-Cookie is present\", function () {\r",
+									"    pm.response.to.have.header(\"Set-Cookie\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up Currency",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Currency is USD\", function () {\r",
+									"    pm.expect(jsonData.data.currency).to.eql(\"usd\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up UserId",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"UserId is valid\", function () {\r",
+									"    pm.expect(jsonData.data.userId).to.be.a(\"number\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"email.com\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up email",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"let response = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is correct\", function () {\r",
+									"    pm.expect(requestBody.email).to.match(/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/);\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"status\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"data\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"userId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"photoFilename\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"distanceUnits\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"currency\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"userId\",\r",
+									"        \"photoFilename\",\r",
+									"        \"distanceUnits\",\r",
+									"        \"currency\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"status\",\r",
+									"    \"data\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"var Ajv = require (\"ajv\"),\r",
+									"    ajv = new Ajv({\r",
+									"        logger: console,\r",
+									"        allErrors: true,\r",
+									"        verbose: true\r",
+									"    })\r",
+									"pm.test (\"Schema is valid\", function() {\r",
+									"pm.expect(ajv.validate(schema, response)).to.be.true;\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"D@###--12@A!1.ua\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Password is valid\", function () {\r",
+									"    pm.expect(requestBody.password).to.match(/^[A-Za-z\\d]{10,}$v/);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"Test1234!\",\r\n  \"repeatPassword\": \"Test1234!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up name/last name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomPassGen(length) {\r",
+									"    const symbols =\r",
+									"        \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"    let password = \"\";\r",
+									"    for (i = 0; i < length; i++) {\r",
+									"        password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"    return password;\r",
+									"}\r",
+									"\r",
+									"const randomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"randomPass\", randomPass);\r",
+									"\r",
+									"\r",
+									"pm.environment.set(\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"pm.test(\"Name is valid\", function () {\r",
+									"    pm.expect(requestBody.name).to.match(/^[a-z'-]+$/);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Last name is valid\", function () {\r",
+									"    pm.expect(requestBody.lastName).to.match(/^[a-z'-]+$/);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{UserEmail}}\",\r\n  \"lastName\": \"{{UserEmail}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/auth/signup",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Edit User Profile tests",
+			"item": [
+				{
+					"name": "Edit User Profile crespndnc",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomImgGen(length) {\r",
+									"  const symbols =\r",
+									"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"  let imgname = \"\";\r",
+									"  for (i = 0; i < length; i++) {\r",
+									"    imgname += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"  }\r",
+									"  let fullimgname = \"user-\" + imgname + \".png\";\r",
+									"  return fullimgname;\r",
+									"}\r",
+									"const randomImg = randomImgGen(5);\r",
+									"pm.environment.set(\"NewPhoto\", randomImg);\r",
+									"\r",
+									"\r",
+									"\r",
+									"function randomCountryGen() {\r",
+									"  const countries = [\r",
+									"    \"Ukraine\",\r",
+									"    \"Germany\",\r",
+									"    \"Spain\",\r",
+									"    \"Latvia\",\r",
+									"    \"Norway\",\r",
+									"    \"Thailand\",\r",
+									"    \"Greece\",\r",
+									"    \"Iran\",\r",
+									"    \"Austria\",\r",
+									"  ];\r",
+									"  let index = Math.floor(Math.random() * countries.length);\r",
+									"  return countries[index];\r",
+									"}\r",
+									"const randomCountry = randomCountryGen();\r",
+									"pm.environment.set(\"NewCountry\", randomCountry);\r",
+									"\r",
+									"function generateDOB() {\r",
+									"  const start = new Date(\"1935-01-01T00:00:00.000Z\").getTime();\r",
+									"  const end = new Date(\"2007-05-01T00:00:00.000Z\").getTime();\r",
+									"\r",
+									"  const randomTime = start + Math.random() * (end - start);\r",
+									"  const randomDOB = new Date(randomTime);\r",
+									"  randomDOB.setMilliseconds(0);\r",
+									"\r",
+									"  return randomDOB.toISOString();\r",
+									"}\r",
+									"\r",
+									"const randomDOB = generateDOB();\r",
+									"pm.environment.set(\"DOB\", randomDOB);\r",
+									"\r",
+									"pm.environment.set (\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+									"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+									"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let errors = /(error|помилка)/;\r",
+									"let errMessages = /(Cannot read property 'mime' of undefined|Не вдається прочитати властивість \"mime\" undefined)/;\r",
+									"let regexDOB = /^(19[3-9]\\d|20{2}[0-7])-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])T([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)\\.(\\d{3})Z$/;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Name is correct\", function () {\r",
+									"    let expectedName = pm.environment.get (\"UserFirstName\")\r",
+									"    pm.expect(jsonData.data.name).to.equal(expectedName);\r",
+									"});\r",
+									"pm.test(\"Name is a string\", function () {\r",
+									"    pm.expect(jsonData.data.name).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Last name is correct\", function () {\r",
+									"    let expectedLastName = pm.environment.get (\"UserLastName\")\r",
+									"    pm.expect(jsonData.data.lastName).to.equal(expectedLastName);\r",
+									"});\r",
+									"pm.test(\"Last name is a string\", function () {\r",
+									"    pm.expect(jsonData.data.lastName).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Date of birth is correct\", function () {\r",
+									"    let expectedDob = pm.environment.get (\"DOB\")\r",
+									"    pm.expect(jsonData.data.dateBirth).to.eql(expectedDob);  //не зовсім зрозумів про \"здійснити перевірку для дати народження (dateBirth), уникнувши жорстко вказаних значень\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Date of birth is valid\", function () {\r",
+									"    let expectedDob = pm.environment.get (\"DOB\")\r",
+									"    pm.expect(jsonData.data.dateBirth).to.match(regexDOB); //тому тут 2 варіанти \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Date of birth is in ISO format\", function () {\r",
+									"    let date = new Date (jsonData.data.dateBirth);\r",
+									"    pm.expect(date.toISOString()).to.eql(jsonData.data.dateBirth); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Country is correct\", function () {\r",
+									"    let expectedCountry = pm.environment.get (\"NewCountry\")\r",
+									"    pm.expect(jsonData.data.country).to.equal(expectedCountry);\r",
+									"});\r",
+									"\r",
+									"if (errors.test(jsonData.status)) {\r",
+									"    pm.test(\"Missing value check (errMessages)\", function () {\r",
+									"        pm.expect(jsonData.message).to.match(errMessages);\r",
+									"    })\r",
+									"};\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"photo\": \"{{NewPhoto}}\",\r\n  \"name\": \"\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"dateBirth\": \"{{DOB}}\",\r\n  \"country\": \"{{NewCountry}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/users/profile",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password UserId is correct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestBody = JSON.parse(pm.request.body.raw);\r",
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"randomPass\", requestBody.password);\r",
+									"\r",
+									"\r",
+									"pm.test(\"ID is correct\", function () {\r",
+									"    let expectedID = pm.environment.get (\"UserId\")\r",
+									"    pm.expect(jsonData.data.userId).to.equal(expectedID);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$/;\r",
+									"function randomPassGen(length) {\r",
+									"  const symbols =\r",
+									"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+									"  let password = \"\";\r",
+									"  do {\r",
+									"    password = \"\";\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"      password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+									"    }\r",
+									"  } while (!regex.test(password));\r",
+									"\r",
+									"  return password;\r",
+									"}\r",
+									"\r",
+									"const newRandomPass = randomPassGen(10);\r",
+									"pm.environment.set(\"newRandomPass\", newRandomPass);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"{{randomPass}}\",\r\n  \"password\": \"{{newRandomPass}}\",\r\n  \"repeatPassword\": \"{{newRandomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/users/password",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative test",
+			"item": [
+				{
+					"name": "Get User Profile 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"User does not exist or the request is incorrect\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(404);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/users/profile123",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile 401",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"User is not authenticated\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(401);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qauto2.forstudy.space/api/users/profile",
+							"protocol": "https",
+							"host": [
+								"qauto2",
+								"forstudy",
+								"space"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auto-run tests",
+			"item": [
+				{
+					"name": "Sign Up A",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(pm.iterationData);\r",
+									"let responseUsername = pm.iterationData.get(\"AFirstName\") + pm.iterationData.get(\"ALastName\");\r",
+									"let responseEmail = pm.iterationData.get(\"AEmail\");\r",
+									"let responsePassword = pm.iterationData.get(\"ArandomPass\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"let regexName = /^[a-zA-Z\\s-]+$/;\r",
+									"let regexEmail = /^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/;\r",
+									"let regexPass = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$/;\r",
+									"\r",
+									"pm.test(\"Status code is acceptable\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+									"});\r",
+									"\r",
+									"let expectedName = pm.iterationData.get(\"AFirstName\");\r",
+									"    if (expectedName === \"\"){\r",
+									"        pm.test(\"Name is empty\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"\\\"name\\\" is not allowed to be empty\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (expectedName.length < 2 || expectedName.length > 20){\r",
+									"        pm.test(\"Name is too short/long\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Name has to be from 2 to 20 characters long\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (!regexName.test(expectedName)){\r",
+									"        pm.test(\"Name contains invalid symbols\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Name is invalid\");\r",
+									"        });\r",
+									"    }\r",
+									"\r",
+									"\r",
+									"let expectedlastName = pm.iterationData.get(\"ALastName\");\r",
+									"    if (expectedlastName === \"\"){\r",
+									"        pm.test(\"Last Name is empty\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"\\\"lastName\\\" is not allowed to be empty\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (expectedlastName.length < 2 || expectedlastName.length > 20){\r",
+									"        pm.test(\"Last Name is too short/long\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Last Name has to be from 2 to 20 characters long\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (!regexName.test(expectedlastName)){\r",
+									"        pm.test(\"Last Name contains invalid symbols\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Last Name is invalid\");\r",
+									"        });\r",
+									"    }\r",
+									"\r",
+									"\r",
+									"let expectedEmail = pm.iterationData.get(\"AEmail\");\r",
+									"    if (expectedEmail === \"\"){\r",
+									"        pm.test(\"Email is empty\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"\\\"email\\\" is not allowed to be empty\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (!regexEmail.test(expectedEmail)){\r",
+									"        pm.test(\"Email has invalid format\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Email is incorrect\");\r",
+									"        });\r",
+									"    }\r",
+									"\r",
+									"\r",
+									"let expectedPass = pm.iterationData.get(\"ArandomPass\");\r",
+									"    if (expectedPass === \"\"){\r",
+									"        pm.test(\"Pass is empty\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"\\\"password\\\" is not allowed to be empty\");\r",
+									"        });\r",
+									"    }\r",
+									"    else if (expectedPass.length < 8 || expectedPass.length > 15 || !regexPass.test(expectedPass)){\r",
+									"        pm.test(\"Pass is invalid\", function () {\r",
+									"            pm.expect(jsonData.message).to.eql(\"Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter\");\r",
+									"        });\r",
+									"    }\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{AFirstName}}\",\r\n  \"lastName\": \"{{ALastName}}\",\r\n  \"email\": \"{{AEmail}}\",\r\n  \"password\": \"{{ArandomPass}}\",\r\n  \"repeatPassword\": \"{{ArandomPass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/signup",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Car A",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"   \r",
+									"pm.test(\"All values are correct\", function () {\r",
+									"    pm.expect(pm.iterationData).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"if (jsonData.status === \"error\") {\r",
+									"pm.test(\"Some value/s is a string or empty\", function () {\r",
+									"    pm.expect(jsonData.message).to.include(\"Unexpected token\");\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//   \"carBrandId\": {{AcarID}},\r\n//   \"carModelId\": {{AcarModel}},\r\n//   \"mileage\": {{AcarMiles}}\r\n// }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cars",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sign Up",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$/;\r",
+							"function randomPassGen(length) {\r",
+							"  const symbols =\r",
+							"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+							"  let password = \"\";\r",
+							"  do {\r",
+							"    password = \"\";\r",
+							"    for (let i = 0; i < length; i++) {\r",
+							"      password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+							"    }\r",
+							"  } while (!regex.test(password));\r",
+							"\r",
+							"  return password;\r",
+							"}\r",
+							"\r",
+							"const randomPass = randomPassGen(10);\r",
+							"pm.environment.set(\"randomPass\", randomPass);\r",
+							"\r",
+							"\r",
+							"pm.environment.set (\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+							"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+							"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"pm.environment.set(\"UserId\", response.data.userId);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"repeatPassword\": \"{{randomPass}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/auth/signup",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Out",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/auth/logout",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Distance is a string\", function () {\r",
+							"    pm.expect(jsonData.data.distanceUnits).to.be.a(\"string\");\r",
+							"});\r",
+							"pm.test(\"Distance is valid\", function () {\r",
+							"    pm.expect(jsonData.data.distanceUnits).to.match(/(km|m|miles|feet)/);\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"User ID is a number\", function () {\r",
+							"    pm.expect(jsonData.data.userId).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Currency is a string\", function () {\r",
+							"    pm.expect(jsonData.data.currency).to.be.a(\"string\");\r",
+							"});\r",
+							"pm.test(\"Currency is valid\", function () {\r",
+							"    pm.expect(jsonData.data.currency).to.match(/(usd|eur|uah|try|cad)/);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{UserEmail}}\",\r\n  \"password\": \"{{randomPass}}\",\r\n  \"remember\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/auth/signin",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Current Users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/current",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is OK\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is OK\", function () {\r",
+							"    pm.expect(jsonData.status).to.equal(\"ok\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"userId is a number\", function () {\r",
+							"    pm.expect(jsonData.data.userId).to.be.a(\"number\");\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"userId is correct\", function () {\r",
+							"    let expectedID = pm.environment.get (\"UserId\");\r",
+							"    pm.expect(jsonData.data.userId).to.equal(expectedID);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name is a string\", function () {\r",
+							"    pm.expect(jsonData.data.name).to.be.a(\"string\");\r",
+							"});\r",
+							"pm.test(\"Name is correct\", function () {\r",
+							"    let expectedName = pm.environment.get (\"UserFirstName\");\r",
+							"    pm.expect(jsonData.data.name).to.equal(expectedName);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Last name is a string\", function () {\r",
+							"    pm.expect(jsonData.data.lastName).to.be.a(\"string\");\r",
+							"});\r",
+							"pm.test(\"Last name is correct\", function () {\r",
+							"    let expectedLastName = pm.environment.get (\"UserLastName\");\r",
+							"    pm.expect(jsonData.data.lastName).to.equal(expectedLastName);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/profile",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User Profile",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function randomImgGen(length) {\r",
+							"  const symbols =\r",
+							"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+							"  let imgname = \"\";\r",
+							"  for (i = 0; i < length; i++) {\r",
+							"    imgname += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+							"  }\r",
+							"  let fullimgname = \"user-\" + imgname + \".png\";\r",
+							"  return fullimgname;\r",
+							"}\r",
+							"const randomImg = randomImgGen(5);\r",
+							"pm.environment.set(\"NewPhoto\", randomImg);\r",
+							"\r",
+							"\r",
+							"\r",
+							"function randomCountryGen() {\r",
+							"  const countries = [\r",
+							"    \"Ukraine\",\r",
+							"    \"Germany\",\r",
+							"    \"Spain\",\r",
+							"    \"Latvia\",\r",
+							"    \"Norway\",\r",
+							"    \"Thailand\",\r",
+							"    \"Greece\",\r",
+							"    \"Iran\",\r",
+							"    \"Austria\",\r",
+							"  ];\r",
+							"  let index = Math.floor(Math.random() * countries.length);\r",
+							"  return countries[index];\r",
+							"}\r",
+							"const randomCountry = randomCountryGen();\r",
+							"pm.environment.set(\"NewCountry\", randomCountry);\r",
+							"\r",
+							"function generateDOB() {\r",
+							"  const start = new Date(\"1935-01-01T00:00:00.000Z\").getTime();\r",
+							"  const end = new Date(\"2007-05-01T00:00:00.000Z\").getTime();\r",
+							"\r",
+							"  const randomTime = start + Math.random() * (end - start);\r",
+							"  const randomDOB = new Date(randomTime);\r",
+							"  randomDOB.setMilliseconds(0);\r",
+							"\r",
+							"  return randomDOB.toISOString();\r",
+							"}\r",
+							"\r",
+							"const randomDOB = generateDOB();\r",
+							"pm.environment.set(\"DOB\", randomDOB);\r",
+							"\r",
+							"pm.environment.set (\"UserFirstName\", pm.environment.replaceIn(\"{{$randomFirstName}}\"));\r",
+							"pm.environment.set(\"UserLastName\", pm.environment.replaceIn(\"{{$randomLastName}}\"));\r",
+							"pm.environment.set(\"UserEmail\", pm.environment.replaceIn(\"{{$randomEmail}}\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let errors = /(error|помилка)/;\r",
+							"let errMessages = /(Cannot read property 'mime' of undefined|Не вдається прочитати властивість \"mime\" undefined)/;\r",
+							"let regexDOB = /^(19[3-9]\\d|20{2}[0-7])-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])T([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)\\.(\\d{3})Z$/;\r",
+							"\r",
+							"\r",
+							"pm.test(\"Name is correct\", function () {\r",
+							"    let expectedName = pm.environment.get (\"UserFirstName\")\r",
+							"    pm.expect(jsonData.data.name).to.equal(expectedName);\r",
+							"});\r",
+							"pm.test(\"Name is a string\", function () {\r",
+							"    pm.expect(jsonData.data.name).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Last name is correct\", function () {\r",
+							"    let expectedLastName = pm.environment.get (\"UserLastName\")\r",
+							"    pm.expect(jsonData.data.lastName).to.equal(expectedLastName);\r",
+							"});\r",
+							"pm.test(\"Last name is a string\", function () {\r",
+							"    pm.expect(jsonData.data.lastName).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date of birth is correct\", function () {\r",
+							"    let expectedDob = pm.environment.get (\"DOB\")\r",
+							"    pm.expect(jsonData.data.dateBirth).to.eql(expectedDob);  //не зовсім зрозумів про \"здійснити перевірку для дати народження (dateBirth), уникнувши жорстко вказаних значень\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date of birth is valid\", function () {\r",
+							"    let expectedDob = pm.environment.get (\"DOB\")\r",
+							"    pm.expect(jsonData.data.dateBirth).to.match(regexDOB); //тому тут 2 варіанти \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Date of birth is in ISO format\", function () {\r",
+							"    let date = new Date (jsonData.data.dateBirth);\r",
+							"    pm.expect(date.toISOString()).to.eql(jsonData.data.dateBirth); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Country is correct\", function () {\r",
+							"    let expectedCountry = pm.environment.get (\"NewCountry\")\r",
+							"    pm.expect(jsonData.data.country).to.equal(expectedCountry);\r",
+							"});\r",
+							"\r",
+							"if (errors.test(jsonData.status)) {\r",
+							"    pm.test(\"Missing value check (errMessages)\", function () {\r",
+							"        pm.expect(jsonData.message).to.match(errMessages);\r",
+							"    })\r",
+							"};"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"photo\": \"{{NewPhoto}}\",\r\n  \"name\": \"{{UserFirstName}}\",\r\n  \"lastName\": \"{{UserLastName}}\",\r\n  \"dateBirth\": \"{{DOB}}\",\r\n  \"country\": \"{{NewCountry}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/profile",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var requestBody = JSON.parse(pm.request.body.raw);\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"randomPass\", requestBody.password);\r",
+							"\r",
+							"\r",
+							"pm.test(\"ID is correct\", function () {\r",
+							"    let expectedID = pm.environment.get (\"UserId\")\r",
+							"    pm.expect(jsonData.data.userId).to.equal(expectedID);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$/;\r",
+							"function randomPassGen(length) {\r",
+							"  const symbols =\r",
+							"    \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\";\r",
+							"  let password = \"\";\r",
+							"  do {\r",
+							"    password = \"\";\r",
+							"    for (let i = 0; i < length; i++) {\r",
+							"      password += symbols.charAt(Math.floor(Math.random() * symbols.length));\r",
+							"    }\r",
+							"  } while (!regex.test(password));\r",
+							"\r",
+							"  return password;\r",
+							"}\r",
+							"\r",
+							"const newRandomPass = randomPassGen(10);\r",
+							"pm.environment.set(\"newRandomPass\", newRandomPass);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"oldPassword\": \"{{randomPass}}\",\r\n  \"password\": \"{{newRandomPass}}\",\r\n  \"repeatPassword\": \"{{newRandomPass}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users/password",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"carId\", jsonData.data.id);\r",
+							"pm.environment.set(\"carMileage\", jsonData.data.mileage);\r",
+							"\r",
+							"pm.test(\"Status code is OK\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is OK\", function () {\r",
+							"    pm.expect(jsonData.status).to.equal(\"ok\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Car id is a number\", function () {\r",
+							"    pm.expect(jsonData.data.id).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Brand is a number\", function () {\r",
+							"    pm.expect(jsonData.data.carBrandId).to.be.a(\"number\");\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"Model is a number\", function () {\r",
+							"    pm.expect(jsonData.data.carModelId).to.be.a(\"number\");\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"Car id is correct\", function () {\r",
+							"    let expectedCarId = pm.environment.get (\"carId\");\r",
+							"    pm.expect(jsonData.data.id).to.equal(expectedCarId);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Creation date is in ISO format\", function () {\r",
+							"    let date = new Date (jsonData.data.carCreatedAt);\r",
+							"    pm.expect(date.toISOString()).to.eql(jsonData.data.carCreatedAt); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carBrandId\": 1,\r\n  \"carModelId\": 1,\r\n  \"mileage\": 122\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/cars",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Car",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let mileage = pm.environment.get (\"carMileage\");\r",
+							"let newMileage = parseInt(mileage)+Math.floor(Math.random()*10);\r",
+							"pm.environment.set(\"carMileage\", newMileage);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is OK\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is OK\", function () {\r",
+							"    pm.expect(jsonData.status).to.equal(\"ok\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mileage is a number\", function () {\r",
+							"    pm.expect(jsonData.data.mileage).to.be.a(\"number\");\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carBrandId\": 2,\r\n  \"carModelId\": 1,\r\n  \"mileage\": {{carMileage}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/cars/{{carId}}",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"cars",
+						"{{carId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.unset (\"UserId\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qauto2.forstudy.space/api/users",
+					"protocol": "https",
+					"host": [
+						"qauto2",
+						"forstudy",
+						"space"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "randomPass",
+			"value": ""
+		},
+		{
+			"key": "UserFirstName",
+			"value": ""
+		},
+		{
+			"key": "UserLastName",
+			"value": ""
+		},
+		{
+			"key": "UserEmail",
+			"value": ""
+		},
+		{
+			"key": "UserId",
+			"value": ""
+		}
+	]
+}
