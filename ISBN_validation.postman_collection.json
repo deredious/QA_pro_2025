@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "c967405b-59d0-45d8-8177-8f9956ffec10",
+		"name": "Public SOAP APIs",
+		"description": "This is a collection of different SOAP APIs that are completley public and do not require any authentication, making it easier for consumers to play with and understand what APIs are all about by seeing the many different ways in which APIs can be used.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44727906",
+		"_collection_link": "https://qapro6.postman.co/workspace/Test-WS~8c395a3b-cc00-4bfa-927b-9f1bdb0d2936/collection/44727906-c967405b-59d0-45d8-8177-8f9956ffec10?action=share&source=collection_link&creator=44727906"
+	},
+	"item": [
+		{
+			"name": "Book ISBN Numbers",
+			"item": [
+				{
+					"name": "Is Valid ISBN13 Number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.text().startsWith(\"<?xml\")) {\r",
+									"\r",
+									"var jsonObject = xml2Json(pm.response.text());\r",
+									"console.log(jsonObject[\"soap:Envelope\"].$[\"xmlns:soap\"]);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    pm.test(\"Content-Type is text/xml\", function () {\r",
+									"        pm.response.to.have.header(\"Content-Type\");\r",
+									"        pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/xml\");\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"    pm.test(\"Content-Length is present\", function () {\r",
+									"        pm.response.to.have.header(\"Content-Length\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Envelope contains attribute\", function () {\r",
+									"        pm.expect(jsonObject[\"soap:Envelope\"].$).to.have.property(\"xmlns:soap\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"xmlns attribute is correct\", function () {\r",
+									"        pm.expect(jsonObject[\"soap:Envelope\"].$[\"xmlns:soap\"]).to.eql(\"http://schemas.xmlsoap.org/soap/envelope/\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"ISBN resut exists in response\", function () {\r",
+									"        pm.expect(jsonObject[\"soap:Envelope\"][\"soap:Body\"][\"m:IsValidISBN13Response\"]).to.have.property(\"m:IsValidISBN13Result\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"ISBN is valid\", function () {\r",
+									"        let result = jsonObject[\"soap:Envelope\"][\"soap:Body\"][\"m:IsValidISBN13Response\"][\"m:IsValidISBN13Result\"];\r",
+									"        pm.expect(result).to.eql(\"true\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"ISBN is invalid\", function () {\r",
+									"        let result = jsonObject[\"soap:Envelope\"][\"soap:Body\"][\"m:IsValidISBN13Response\"][\"m:IsValidISBN13Result\"];\r",
+									"        pm.expect(result).to.eql(\"false\");\r",
+									"    });\r",
+									"} else {\r",
+									"console.log(\"Skipping tests because status is not 200\");\r",
+									"}\r",
+									"} else {\r",
+									"    pm.test(\"Response is HTML\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"html\");\r",
+									"    pm.expect(pm.response.text().startsWith(\"<!DOCTYPE html\")).to.be.true;\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <IsValidISBN13 xmlns=\"http://webservices.daehosting.com/ISBN\">\n      <sISBN>978-1-4612-9090-2</sISBN>\n    </IsValidISBN13>\n  </soap:Body>\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://webservices.daehosting.com/services/isbnservice.wso",
+							"protocol": "http",
+							"host": [
+								"webservices",
+								"daehosting",
+								"com"
+							],
+							"path": [
+								"services",
+								"isbnservice.wso"
+							]
+						},
+						"description": "The test is done by calculation on the first 12 digits and compare the result with the checksum number at the end. You have to pass a 13 digits number."
+					},
+					"response": []
+				},
+				{
+					"name": "Is Valid ISBN10 Number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.text().startsWith(\"<?xml\")) {\r",
+									"\r",
+									"var jsonObject = xml2Json(pm.response.text());\r",
+									"console.log(jsonObject[\"soap:Envelope\"].$[\"xmlns:soap\"]);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    pm.test(\"Content-Type is text/xml\", function () {\r",
+									"        pm.response.to.have.header(\"Content-Type\");\r",
+									"        pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/xml\");\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"    pm.test(\"Content-Length is present\", function () {\r",
+									"        pm.response.to.have.header(\"Content-Length\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Envelope contains attribute\", function () {\r",
+									"        pm.expect(jsonObject[\"soap:Envelope\"].$).to.have.property(\"xmlns:soap\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"xmlns attribute is correct\", function () {\r",
+									"        pm.expect(jsonObject[\"soap:Envelope\"].$[\"xmlns:soap\"]).to.eql(\"http://schemas.xmlsoap.org/soap/envelope/\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"ISBN resut exists in response\", function () {\r",
+									"        pm.expect(jsonObject[\"soap:Envelope\"][\"soap:Body\"][\"m:IsValidISBN10Response\"]).to.have.property(\"m:IsValidISBN10Result\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"ISBN is valid\", function () {\r",
+									"        let result = jsonObject[\"soap:Envelope\"][\"soap:Body\"][\"m:IsValidISBN10Response\"][\"m:IsValidISBN10Result\"];\r",
+									"        pm.expect(result).to.eql(\"true\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"ISBN is invalid\", function () {\r",
+									"        let result = jsonObject[\"soap:Envelope\"][\"soap:Body\"][\"m:IsValidISBN10Response\"][\"m:IsValidISBN10Result\"];\r",
+									"        pm.expect(result).to.eql(\"false\");\r",
+									"    });\r",
+									"} else {\r",
+									"console.log(\"Skipping tests because status is not 200\");\r",
+									"}\r",
+									"} else {\r",
+									"    pm.test(\"Response is HTML\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"html\");\r",
+									"    pm.expect(pm.response.text().startsWith(\"<!DOCTYPE html\")).to.be.true;\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <IsValidISBN10 xmlns=\"http://webservices.daehosting.com/ISBN\">\n      <sISBN>0-19-852663-6</sISBN>\n    </IsValidISBN10>\n  </soap:Body>\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://webservices.daehosting.com/services/isbnservice.wso",
+							"protocol": "http",
+							"host": [
+								"webservices",
+								"daehosting",
+								"com"
+							],
+							"path": [
+								"services",
+								"isbnservice.wso"
+							]
+						},
+						"description": "The test is done by calculation on the first 9 digits and compare the result with the checksum number at the end. You have to pass a 10 digits number or 8 digits and an X."
+					},
+					"response": []
+				}
+			],
+			"description": "SOAP APIs for book ISBN numbers.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
