@@ -1,0 +1,987 @@
+{
+	"id": "97eec941-2233-4bbb-b3df-04362039a015",
+	"name": "Atlas Collection",
+	"timestamp": "2025-07-01T23:20:55.191Z",
+	"collection_id": "44727906-7aef6499-2607-4d27-b594-b6f9cde91af4",
+	"folder_id": 0,
+	"environment_id": "44727906-b2a28d19-2b82-44c4-98b2-3c0637519baf",
+	"totalPass": 111,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-07-01T23:20:48.533Z",
+	"totalFail": 174,
+	"results": [
+		{
+			"id": "b6985f17-96ab-4417-b367-214ed991edf6",
+			"name": "Get Users",
+			"url": "http://localhost:3000/api/users",
+			"time": 108,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Tests skipped due to name containing 'B'": false,
+				"Email is valid Robert Baratheon": true,
+				"Schema is valid Robert Baratheon": true,
+				"Name is valid Robert Baratheon": true,
+				"ID is valid 59b99db4cfa9a34dcd7885b7": true,
+				"Email is valid Robb Stark": true,
+				"Schema is valid Robb Stark": true,
+				"Name is valid Robb Stark": true,
+				"ID is valid 59b99dbacfa9a34dcd7885c2": true,
+				"Email is valid Tormund Giantsbane": true,
+				"Schema is valid Tormund Giantsbane": true,
+				"Name is valid Tormund Giantsbane": true,
+				"ID is valid 59b99dc3cfa9a34dcd7885d6": true,
+				"Email is valid Qyburn": true,
+				"Schema is valid Qyburn": true,
+				"Name is valid Qyburn": true,
+				"ID is valid 59b99ddbcfa9a34dcd7885ff": true,
+				"Email is valid Robert Jordan": true,
+				"Schema is valid Robert Jordan": true,
+				"Name is valid Robert Jordan": true,
+				"ID is valid 59b99de2cfa9a34dcd788610": true,
+				"Email is valid Garrett Obrien": true,
+				"Schema is valid Garrett Obrien": true,
+				"Name is valid Garrett Obrien": true,
+				"ID is valid 59b99deacfa9a34dcd788625": true,
+				"Email is valid Kimberly Gates": true,
+				"Schema is valid Kimberly Gates": true,
+				"Name is valid Kimberly Gates": true,
+				"ID is valid 59b99defcfa9a34dcd788632": true,
+				"Email is valid Barbara Gonzalez": true,
+				"Schema is valid Barbara Gonzalez": true,
+				"Name is valid Barbara Gonzalez": true,
+				"ID is valid 59b99df2cfa9a34dcd78863b": true,
+				"Email is valid Christopher Robinson": true,
+				"Schema is valid Christopher Robinson": true,
+				"Name is valid Christopher Robinson": true,
+				"ID is valid 59b99df5cfa9a34dcd788641": true,
+				"Email is valid Jerry Cabrera": true,
+				"Schema is valid Jerry Cabrera": true,
+				"Name is valid Jerry Cabrera": true,
+				"ID is valid 59b99df7cfa9a34dcd788644": true,
+				"Email is valid Elizabeth Wiggins": true,
+				"Schema is valid Elizabeth Wiggins": true,
+				"Name is valid Elizabeth Wiggins": true,
+				"ID is valid 59b99df8cfa9a34dcd788648": true,
+				"Email is valid Nicholas Webster": true,
+				"Schema is valid Nicholas Webster": true,
+				"Name is valid Nicholas Webster": true,
+				"ID is valid 59b99df9cfa9a34dcd788649": true,
+				"Email is valid Jeffrey Roberts": true,
+				"Schema is valid Jeffrey Roberts": true,
+				"Name is valid Jeffrey Roberts": true,
+				"ID is valid 59b99dfecfa9a34dcd788655": true,
+				"Email is valid Deborah Kennedy": true,
+				"Schema is valid Deborah Kennedy": true,
+				"Name is valid Deborah Kennedy": true,
+				"ID is valid 59b99e02cfa9a34dcd78865d": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Tests skipped due to name containing 'B'": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Email is valid Robert Baratheon": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Robert Baratheon": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Robert Baratheon": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99db4cfa9a34dcd7885b7": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Robb Stark": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Robb Stark": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Robb Stark": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99dbacfa9a34dcd7885c2": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Tormund Giantsbane": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Tormund Giantsbane": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Tormund Giantsbane": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99dc3cfa9a34dcd7885d6": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Qyburn": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Qyburn": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Qyburn": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99ddbcfa9a34dcd7885ff": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Robert Jordan": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Robert Jordan": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Robert Jordan": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99de2cfa9a34dcd788610": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Garrett Obrien": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Garrett Obrien": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Garrett Obrien": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99deacfa9a34dcd788625": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Kimberly Gates": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Kimberly Gates": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Kimberly Gates": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99defcfa9a34dcd788632": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Barbara Gonzalez": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Barbara Gonzalez": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Barbara Gonzalez": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99df2cfa9a34dcd78863b": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Christopher Robinson": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Christopher Robinson": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Christopher Robinson": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99df5cfa9a34dcd788641": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Jerry Cabrera": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Jerry Cabrera": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Jerry Cabrera": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99df7cfa9a34dcd788644": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Elizabeth Wiggins": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Elizabeth Wiggins": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Elizabeth Wiggins": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99df8cfa9a34dcd788648": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Nicholas Webster": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Nicholas Webster": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Nicholas Webster": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99df9cfa9a34dcd788649": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Jeffrey Roberts": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Jeffrey Roberts": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Jeffrey Roberts": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99dfecfa9a34dcd788655": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid Deborah Kennedy": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid Deborah Kennedy": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Deborah Kennedy": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99e02cfa9a34dcd78865d": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				108
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Tests skipped due to name containing 'B'": false,
+					"Email is valid Robert Baratheon": true,
+					"Schema is valid Robert Baratheon": true,
+					"Name is valid Robert Baratheon": true,
+					"ID is valid 59b99db4cfa9a34dcd7885b7": true,
+					"Email is valid Robb Stark": true,
+					"Schema is valid Robb Stark": true,
+					"Name is valid Robb Stark": true,
+					"ID is valid 59b99dbacfa9a34dcd7885c2": true,
+					"Email is valid Tormund Giantsbane": true,
+					"Schema is valid Tormund Giantsbane": true,
+					"Name is valid Tormund Giantsbane": true,
+					"ID is valid 59b99dc3cfa9a34dcd7885d6": true,
+					"Email is valid Qyburn": true,
+					"Schema is valid Qyburn": true,
+					"Name is valid Qyburn": true,
+					"ID is valid 59b99ddbcfa9a34dcd7885ff": true,
+					"Email is valid Robert Jordan": true,
+					"Schema is valid Robert Jordan": true,
+					"Name is valid Robert Jordan": true,
+					"ID is valid 59b99de2cfa9a34dcd788610": true,
+					"Email is valid Garrett Obrien": true,
+					"Schema is valid Garrett Obrien": true,
+					"Name is valid Garrett Obrien": true,
+					"ID is valid 59b99deacfa9a34dcd788625": true,
+					"Email is valid Kimberly Gates": true,
+					"Schema is valid Kimberly Gates": true,
+					"Name is valid Kimberly Gates": true,
+					"ID is valid 59b99defcfa9a34dcd788632": true,
+					"Email is valid Barbara Gonzalez": true,
+					"Schema is valid Barbara Gonzalez": true,
+					"Name is valid Barbara Gonzalez": true,
+					"ID is valid 59b99df2cfa9a34dcd78863b": true,
+					"Email is valid Christopher Robinson": true,
+					"Schema is valid Christopher Robinson": true,
+					"Name is valid Christopher Robinson": true,
+					"ID is valid 59b99df5cfa9a34dcd788641": true,
+					"Email is valid Jerry Cabrera": true,
+					"Schema is valid Jerry Cabrera": true,
+					"Name is valid Jerry Cabrera": true,
+					"ID is valid 59b99df7cfa9a34dcd788644": true,
+					"Email is valid Elizabeth Wiggins": true,
+					"Schema is valid Elizabeth Wiggins": true,
+					"Name is valid Elizabeth Wiggins": true,
+					"ID is valid 59b99df8cfa9a34dcd788648": true,
+					"Email is valid Nicholas Webster": true,
+					"Schema is valid Nicholas Webster": true,
+					"Name is valid Nicholas Webster": true,
+					"ID is valid 59b99df9cfa9a34dcd788649": true,
+					"Email is valid Jeffrey Roberts": true,
+					"Schema is valid Jeffrey Roberts": true,
+					"Name is valid Jeffrey Roberts": true,
+					"ID is valid 59b99dfecfa9a34dcd788655": true,
+					"Email is valid Deborah Kennedy": true,
+					"Schema is valid Deborah Kennedy": true,
+					"Name is valid Deborah Kennedy": true,
+					"ID is valid 59b99e02cfa9a34dcd78865d": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "d84e874f-f63c-4536-ae62-de02f9ade446",
+			"name": "Get User by Id",
+			"url": "http://localhost:3000/api/users/59b99dbfcfa9a34dcd7885cc",
+			"time": 34,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Name is valid Stannis Baratheon": true,
+				"ID is valid 59b99dbfcfa9a34dcd7885cc": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Stannis Baratheon": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 59b99dbfcfa9a34dcd7885cc": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				34
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Name is valid Stannis Baratheon": true,
+					"ID is valid 59b99dbfcfa9a34dcd7885cc": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "992fee0c-3ae9-49f3-a208-97b596d3ed5f",
+			"name": "Add User",
+			"url": "http://localhost:3000/api/users",
+			"time": 90,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Name is valid Max Verstappen": true,
+				"ID is valid 68646d51b25de7d79d8f30f8": true,
+				"Date is valid ": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Max Verstappen": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 68646d51b25de7d79d8f30f8": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Date is valid ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				90
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Name is valid Max Verstappen": true,
+					"ID is valid 68646d51b25de7d79d8f30f8": true,
+					"Date is valid ": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "5b0d21f9-9d2f-4ea9-9e2d-06dde0c2836b",
+			"name": "Add User Copy",
+			"url": "http://localhost:3000/api/users",
+			"time": 38,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Similar user already exists": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Similar user already exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				38
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Similar user already exists": true
+				}
+			]
+		},
+		{
+			"id": "fc8ef472-da85-485c-8d7e-ddf75e858620",
+			"name": "Get New User by Id",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 38,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Name is valid Max Verstappen": true,
+				"ID is valid 68646d51b25de7d79d8f30f8": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Max Verstappen": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 68646d51b25de7d79d8f30f8": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				38
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Name is valid Max Verstappen": true,
+					"ID is valid 68646d51b25de7d79d8f30f8": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "caff4756-0efb-4e39-b800-667d94ca6dd2",
+			"name": "Edit User",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 40,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Name is valid Lando Norris": true,
+				"ID is valid 68646d51b25de7d79d8f30f8": true,
+				"Created Date is valid ": true,
+				"Updated Date is valid ": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Lando Norris": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 68646d51b25de7d79d8f30f8": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Created Date is valid ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Updated Date is valid ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				40
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Name is valid Lando Norris": true,
+					"ID is valid 68646d51b25de7d79d8f30f8": true,
+					"Created Date is valid ": true,
+					"Updated Date is valid ": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "90d47897-cb37-4d35-8ead-2c8c715bd63c",
+			"name": "Edit User Copy",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 38,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Name is valid Lando Norris": true,
+				"ID is valid 68646d51b25de7d79d8f30f8": true,
+				"Created Date is valid ": true,
+				"Updated Date is valid ": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Lando Norris": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 68646d51b25de7d79d8f30f8": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Created Date is valid ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Updated Date is valid ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				38
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Name is valid Lando Norris": true,
+					"ID is valid 68646d51b25de7d79d8f30f8": true,
+					"Created Date is valid ": true,
+					"Updated Date is valid ": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "0202da21-030f-4ba9-86f8-8e15bfbc48cc",
+			"name": "Get New User by Id 2",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 35,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Name is valid Lando Norris": true,
+				"ID is valid 68646d51b25de7d79d8f30f8": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid Lando Norris": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid 68646d51b25de7d79d8f30f8": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				35
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Name is valid Lando Norris": true,
+					"ID is valid 68646d51b25de7d79d8f30f8": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "72b0d634-edc3-4a06-b564-1eb045e82ebf",
+			"name": "Delete User",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 37,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Email is valid": true,
+				"Schema is valid": true,
+				"Message confirms deletion": true,
+				"Name is valid": true,
+				"ID is valid": true,
+				"Created Date is valid ": true,
+				"Doc is deleted": true,
+				"Content-Type is application/json": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Message confirms deletion": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"ID is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Created Date is valid ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Doc is deleted": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type is application/json": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				37
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Email is valid": true,
+					"Schema is valid": true,
+					"Message confirms deletion": true,
+					"Name is valid": true,
+					"ID is valid": true,
+					"Created Date is valid ": true,
+					"Doc is deleted": true,
+					"Content-Type is application/json": true
+				}
+			]
+		},
+		{
+			"id": "972588f8-6f5b-431f-af9a-ffb8142f70f7",
+			"name": "Delete User Copy",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 38,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Doc is not found": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Doc is not found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				38
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Doc is not found": true
+				}
+			]
+		},
+		{
+			"id": "59baa89b-e8fb-426c-b00d-e1f183f15435",
+			"name": "Get New User by Id 3",
+			"url": "http://localhost:3000/api/users/68646d51b25de7d79d8f30f8",
+			"time": 79,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Doc is not found": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Doc is not found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				79
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Doc is not found": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 575,
+	"collection": {
+		"requests": [
+			{
+				"id": "b6985f17-96ab-4417-b367-214ed991edf6",
+				"method": "GET"
+			},
+			{
+				"id": "d84e874f-f63c-4536-ae62-de02f9ade446",
+				"method": "GET"
+			},
+			{
+				"id": "992fee0c-3ae9-49f3-a208-97b596d3ed5f",
+				"method": "POST"
+			},
+			{
+				"id": "5b0d21f9-9d2f-4ea9-9e2d-06dde0c2836b",
+				"method": "POST"
+			},
+			{
+				"id": "fc8ef472-da85-485c-8d7e-ddf75e858620",
+				"method": "GET"
+			},
+			{
+				"id": "caff4756-0efb-4e39-b800-667d94ca6dd2",
+				"method": "PUT"
+			},
+			{
+				"id": "90d47897-cb37-4d35-8ead-2c8c715bd63c",
+				"method": "PUT"
+			},
+			{
+				"id": "0202da21-030f-4ba9-86f8-8e15bfbc48cc",
+				"method": "GET"
+			},
+			{
+				"id": "72b0d634-edc3-4a06-b564-1eb045e82ebf",
+				"method": "DELETE"
+			},
+			{
+				"id": "972588f8-6f5b-431f-af9a-ffb8142f70f7",
+				"method": "DELETE"
+			},
+			{
+				"id": "59baa89b-e8fb-426c-b00d-e1f183f15435",
+				"method": "GET"
+			}
+		]
+	}
+}
